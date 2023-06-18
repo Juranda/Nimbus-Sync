@@ -1,0 +1,10 @@
+@host = localhost
+@port = 7035
+
+PUT https://{{host}}:{{port}}/TecnicalDraws/12341234
+Content-Type: application/json
+Bearer IAOSJNDIAJDIJAIWDJIASIDJIAJDIJIASDAJID
+
+{
+  "name":"Desenho de um rala junin"
+}

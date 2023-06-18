@@ -1,0 +1,14 @@
+﻿using AutoMapper;
+
+namespace NimbusSync.Server.Models.Perfis
+{
+    public class TecnicalDrawProfile : Profile
+    {
+        public TecnicalDrawProfile()
+        {
+            CreateMap<DTO.PostTecnicalDrawRequest, Domain.TecnicalDraw>();
+            CreateMap<DTO.UpdateTecnicalDrawRequest, Domain.TecnicalDraw>();
+            CreateMap<Domain.TecnicalDraw, DTO.TecnicalDrawDTO>();
+        }
+    }
+}

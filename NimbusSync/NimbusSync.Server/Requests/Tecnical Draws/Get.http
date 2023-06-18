@@ -1,0 +1,4 @@
+@host = localhost
+@port = 7035
+
+GET https://{{host}}:{{port}}/TecnicalDraws
