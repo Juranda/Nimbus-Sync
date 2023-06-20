@@ -1,10 +1,9 @@
 ﻿using NimbusSync.Server.Domain;
 using NimbusSync.Server.Models.DTO;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Reflection;
 
 namespace NimbusSync.Server.Repositories
 {
-
     public class TecnicalDrawStaticRepository : ITecnicalDrawRepository
     {
         private readonly List<TecnicalDraw> tecnicalDraws;
@@ -17,19 +16,6 @@ namespace NimbusSync.Server.Repositories
                     Code = "12341234",
                     Name = "Desenho de Rele",
                     Description = "Um desenho de um rele",
-                    Materials = new List<Material>
-                    {
-                        new Material
-                        {
-                            Id = "1234",
-                            Name = "Aço inox"
-                        },
-                        new Material
-                        {
-                            Id = "65342",
-                            Name = "Apagador"
-                        }
-                    },
                     CreationDate = DateTime.Now.AddDays(-1),
                     RegistrationDate = DateTime.Now,
                     File = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 },
@@ -72,8 +58,8 @@ namespace NimbusSync.Server.Repositories
 
             var filteredDraws = tecnicalDraws
             .Where(draw =>
-            (string.IsNullOrEmpty(tecnicalDrawQuery.Name) || draw.Name.Contains(tecnicalDrawQuery.Name)) &&
-            (string.IsNullOrEmpty(tecnicalDrawQuery.AuthorName) || draw.Author.FirstName.Contains(tecnicalDrawQuery.AuthorName)) &&
+            (string.IsNullOrEmpty(tecnicalDrawQuery.Name) || draw.Name.ToLower().Contains(tecnicalDrawQuery.Name)) &&
+            (string.IsNullOrEmpty(tecnicalDrawQuery.AuthorName) || draw.Author.FirstName.ToLower().Contains(tecnicalDrawQuery.AuthorName)) &&
             (string.IsNullOrEmpty(tecnicalDrawQuery.Description) || draw.Description.Contains(tecnicalDrawQuery.Description)))
             .ToList();
 
@@ -103,7 +89,6 @@ namespace NimbusSync.Server.Repositories
 
             tD.Name = tecnicalDraw.Name;
             tD.Description = tecnicalDraw.Description;
-            tD.Materials = tecnicalDraw.Materials;
             tD.File = tecnicalDraw.File;
             tD.CreationDate = tecnicalDraw.CreationDate;
             tD.RegistrationDate = tecnicalDraw.RegistrationDate;
@@ -121,6 +106,25 @@ namespace NimbusSync.Server.Repositories
             tecnicalDraws.Remove(tecDrawToRemove);
 
             return Task.FromResult(tecDrawToRemove);
+        }
+
+        public Task<TecnicalDraw> PatchTecnicalDrawAsync(string code, TecnicalDraw tecnicalDraw)
+        {
+            var tecDraw = tecnicalDraws.FirstOrDefault(tD => tD.Code == code);
+
+            if (tecDraw == null) return null;
+
+            List<PropertyInfo> notNullOrEmptyProps = tecnicalDraw.GetNotNullProperties();
+            Type tecDrawType = tecDraw.GetType();
+
+            notNullOrEmptyProps.ForEach(newPropertie =>
+            {
+                PropertyInfo tecDrawPropertyInfo = tecDrawType.GetProperty(newPropertie.Name);
+
+                tecDrawPropertyInfo.SetValue(tecDraw, newPropertie.GetValue(tecnicalDraw));
+            });
+
+            return Task.FromResult(tecDraw);
         }
     }
 }

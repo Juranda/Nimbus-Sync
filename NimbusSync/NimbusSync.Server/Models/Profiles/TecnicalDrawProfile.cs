@@ -8,6 +8,7 @@ namespace NimbusSync.Server.Models.Perfis
         {
             CreateMap<DTO.PostTecnicalDrawRequest, Domain.TecnicalDraw>();
             CreateMap<DTO.UpdateTecnicalDrawRequest, Domain.TecnicalDraw>();
+            CreateMap<DTO.PatchTecnicalDrawRequest, Domain.TecnicalDraw>();
             CreateMap<Domain.TecnicalDraw, DTO.TecnicalDrawDTO>();
         }
     }

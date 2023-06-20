@@ -82,5 +82,22 @@ namespace NimbusSync.Server.Controllers
 
             return Ok(tecDrawDTO);
         }
+
+        [HttpPatch]
+        [Route("{code}")]
+        public async Task<IActionResult> PatchTecnicalDraw(
+            [FromRoute] string code, 
+            [FromBody] PatchTecnicalDrawRequest patchTecnicalDrawRequest)
+        {
+            var tecDraw = mapper.Map<TecnicalDraw>(patchTecnicalDrawRequest);
+
+            tecDraw = await tecnicalDrawRepository.PatchTecnicalDrawAsync(code, tecDraw);
+
+            if(tecDraw == null) return NotFound();
+
+            var tecDrawDTO = mapper.Map<TecnicalDrawDTO>(tecDraw);
+
+            return Ok(tecDrawDTO);
+        }
     }
 }

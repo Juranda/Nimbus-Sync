@@ -10,5 +10,6 @@ namespace NimbusSync.Server.Repositories
         public Task<List<TecnicalDraw>> GetTecnicalDrawsAsync(TecnicalDrawQuery tecnicalDraw);
         public Task<TecnicalDraw> PostTecnicalDrawAsync(TecnicalDraw tecnicalDraw);
         public Task<TecnicalDraw> PutTecnicalDrawAsync(string code, TecnicalDraw tecnicalDraw);
+        public Task<TecnicalDraw> PatchTecnicalDrawAsync(string code, TecnicalDraw tecnicalDraw);
     }
 }
