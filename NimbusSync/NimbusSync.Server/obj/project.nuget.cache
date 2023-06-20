@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EEmqLPOzEsbK2m1bBTG506AwxKO1Cpojv0ke73wfdMe0Y6PKxHgQWzf+YzcdA6XvgH97xvfAZD/H1/eof0BrYQ==",
+  "dgSpecHash": "6WG+1bKiyyEEGCDPTBJaqjVAWURt98Eo2NgBU5wyZPGDdYCdeEsdzP6DgGEQrbqZCQ2F8zscsLOT4xIJ2kQmXQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server\\NimbusSync.Server.csproj",
+  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server\\NimbusSync.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felip\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\felip\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

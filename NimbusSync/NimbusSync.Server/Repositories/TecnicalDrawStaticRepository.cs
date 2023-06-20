@@ -36,7 +36,8 @@ namespace NimbusSync.Server.Repositories
                     Author = new Account
                     {
                         FirstName = "Felipe"
-                    }
+                    },
+                    AuthorId = "meuid"
                 },
                 new TecnicalDraw
                 {
@@ -49,7 +50,8 @@ namespace NimbusSync.Server.Repositories
                     Author = new Account
                     {
                         FirstName = "Bruno"
-                    }
+                    },
+                    AuthorId = "seuid"
                 }
             };
         }

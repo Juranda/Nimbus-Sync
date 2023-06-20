@@ -11,6 +11,6 @@ namespace NimbusSync.Server.Models.DTO
         public byte[] File { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public Account Author { get; set; }
+        public string AuthorId { get; set; }
     }
 }
