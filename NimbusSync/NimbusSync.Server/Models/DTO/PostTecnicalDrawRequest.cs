@@ -7,7 +7,6 @@ namespace NimbusSync.Server.Models.DTO
             string Name,
             string Description,
             byte[] File,
-            List<string> Materials,
             string AuthorId
         );
 }
