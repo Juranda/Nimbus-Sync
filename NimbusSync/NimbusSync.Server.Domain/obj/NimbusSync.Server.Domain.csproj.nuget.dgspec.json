@@ -11,7 +11,7 @@
         "projectName": "NimbusSync.Server.Domain",
         "projectPath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server.Domain\\NimbusSync.Server.Domain.csproj",
         "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felip\\Source\\Repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server.Domain\\obj\\",
+        "outputPath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config",

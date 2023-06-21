@@ -93,7 +93,7 @@ namespace NimbusSync.Server.Controllers
 
             tecDraw = await tecnicalDrawRepository.PatchTecnicalDrawAsync(code, tecDraw);
 
-            if(tecDraw == null) return NotFound();
+            if (tecDraw == null) return NotFound();
 
             var tecDrawDTO = mapper.Map<TecnicalDrawDTO>(tecDraw);
 
