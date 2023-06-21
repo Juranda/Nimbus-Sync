@@ -15,6 +15,7 @@ builder.Services.AddDbContext<NimbusSyncDBContext>(options =>
     );
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ITecnicalDrawRepository, TecnicalDrawStaticRepository>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 

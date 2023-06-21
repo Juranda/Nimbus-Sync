@@ -1,6 +1,4 @@
-﻿using NimbusSync.Server.Domain;
-
-namespace NimbusSync.Server.Models.DTO
+﻿namespace NimbusSync.Server.Models.DTO
 {
     public class TecnicalDrawDTO
     {
