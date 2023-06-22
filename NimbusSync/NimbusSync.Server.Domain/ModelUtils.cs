@@ -21,6 +21,8 @@ namespace NimbusSync.Server.Domain
 
                 if (p.PropertyType == typeof(string) && string.IsNullOrEmpty((string)value)) return false;
 
+                if (Array.Empty<byte>() == value) return false;
+
                 return true;
             }).ToList();
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using NimbusSync.Server.Domain;
 using NimbusSync.Server.Models.DTO;
@@ -87,15 +88,14 @@ namespace NimbusSync.Server.Controllers
         [Route("{code}")]
         public async Task<IActionResult> PatchTecnicalDraw(
             [FromRoute] string code, 
-            [FromBody] PatchTecnicalDrawRequest patchTecnicalDrawRequest)
+            [FromBody] PatchTecnicalDrawRequest patchTecnicalDrawDocument)
         {
-            var tecDraw = mapper.Map<TecnicalDraw>(patchTecnicalDrawRequest);
+            var newTecDraw = mapper.Map<TecnicalDraw>(patchTecnicalDrawDocument);
+            newTecDraw = await tecnicalDrawRepository.PatchTecnicalDrawAsync(code, newTecDraw);
 
-            tecDraw = await tecnicalDrawRepository.PatchTecnicalDrawAsync(code, tecDraw);
+            if(newTecDraw == null) return NotFound();
 
-            if (tecDraw == null) return NotFound();
-
-            var tecDrawDTO = mapper.Map<TecnicalDrawDTO>(tecDraw);
+            var tecDrawDTO = mapper.Map<TecnicalDrawDTO>(newTecDraw);
 
             return Ok(tecDrawDTO);
         }
