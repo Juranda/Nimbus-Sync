@@ -1,0 +1,6 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/NimbusSync/NimbusSync.Server/obj/Debug/net6.0/NimbusSync.Server.assets.cache
+/NimbusSync/NimbusSync.Server/obj/Debug/net6.0/NimbusSync.Server.csproj.AssemblyReference.cache
