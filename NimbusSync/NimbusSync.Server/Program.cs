@@ -15,6 +15,8 @@ builder.Services.AddDbContext<NimbusSyncDBContext>(options =>
     );
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ITecnicalDrawRepository, TecnicalDrawStaticRepository>();
+builder.Services.AddScoped<ITokenHandler, TokenHandler>();
+builder.Services.AddScoped<IAuthRepository, AuthStaticRepository>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
@@ -23,6 +25,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors();
 }
 
 app.UseHttpsRedirection();

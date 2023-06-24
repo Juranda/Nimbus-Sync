@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace NimbusSync.Server.Models.Perfis
+namespace NimbusSync.Server.Models.Profiles
 {
     public class TecnicalDrawProfile : Profile
     {
@@ -10,22 +10,6 @@ namespace NimbusSync.Server.Models.Perfis
             CreateMap<DTO.UpdateTecnicalDrawRequest, Domain.TecnicalDraw>();
             CreateMap<DTO.PatchTecnicalDrawRequest, Domain.TecnicalDraw>();
             CreateMap<Domain.TecnicalDraw, DTO.TecnicalDrawDTO>();
-                //.ForAllMembers(opt =>
-                //{
-                //    opt.Condition((src, dest, srcMember, destMember, context) =>
-                //    {
-                //        if (srcMember == null ||
-                //            (srcMember.GetType() == typeof(DateTime) && (DateTime)srcMember == DateTime.MinValue) ||
-                //            (srcMember.GetType() == typeof(string) && string.IsNullOrEmpty((string)srcMember)) ||
-                //            (srcMember.GetType() == typeof(byte[]) && (byte[])srcMember == Array.Empty<byte>()))
-                //        {
-                //            destMember = null;
-                //            return false;
-                //        }
-
-                //        return true;
-                //    });
-                //});
         }
     }
 }

@@ -12,7 +12,7 @@ namespace NimbusSync.Server.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Account>()
-                .Property(a => a.Privilages)
+                .Property(a => a.Privileges)
                 .HasConversion(
                     v => string.Join(",", v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)

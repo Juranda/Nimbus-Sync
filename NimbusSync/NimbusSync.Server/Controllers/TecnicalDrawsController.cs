@@ -91,6 +91,7 @@ namespace NimbusSync.Server.Controllers
             [FromBody] PatchTecnicalDrawRequest patchTecnicalDrawDocument)
         {
             var newTecDraw = mapper.Map<TecnicalDraw>(patchTecnicalDrawDocument);
+
             newTecDraw = await tecnicalDrawRepository.PatchTecnicalDrawAsync(code, newTecDraw);
 
             if(newTecDraw == null) return NotFound();

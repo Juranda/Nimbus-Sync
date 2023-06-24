@@ -1,26 +1,30 @@
 ﻿namespace NimbusSync.Client
 {
-    public class TecDraw
+    public class TecnicalDraw
     {
-        public string? Id { get; set; }
+        public string? Code { get; set; }
         public string? Name { get; set; }
+        public string? Description { get; set; }
         public DateTime? CreationDate { get; set; }
         public string? Author { get; set; }
         public string? FilePath { get; set; }
-        public byte[]? ByteFile => GetFile();
 
         const string HAS_NO_AUTHOR = "None";
 
-        public TecDraw(string Id, string Name, string FilePath)
-        {
-            this.Id = Id;
-            this.Name = Name;
+        public TecnicalDraw() { }
 
-            if (!File.Exists(FilePath))
+        public TecnicalDraw(string? code, string? name, string? description, string? filePath)
+        {
+            Code = code;
+            Name = name;
+            Description = description;
+            if (!File.Exists(filePath))
             {
                 Author = HAS_NO_AUTHOR;
-                CreationDate = null;                
+                CreationDate = null;
             }
+
+            FilePath = filePath;
 
             SetAuthorUsingPath();
             SetCreationDateUsingPath();
@@ -33,16 +37,18 @@
                 FileInfo fileInfo = new FileInfo(FilePath);
 
                 string author = fileInfo.GetAccessControl().GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
-                
-                if(string.IsNullOrEmpty(author))
+
+                if (string.IsNullOrEmpty(author))
                 {
                     Author = HAS_NO_AUTHOR;
                     return;
                 }
 
-                Author = author;
+                author = author.Split("\\", StringSplitOptions.RemoveEmptyEntries).Last();
 
-            } catch (Exception ex)
+                Author = author;
+            }
+            catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
@@ -50,7 +56,7 @@
 
         private void SetCreationDateUsingPath()
         {
-            if(!File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
                 CreationDate = null;
                 return;
@@ -60,11 +66,13 @@
             {
                 var creationDateTime = File.GetCreationTime(FilePath);
                 CreationDate = creationDateTime;
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
         }
+
 
         public byte[]? GetFile()
         {

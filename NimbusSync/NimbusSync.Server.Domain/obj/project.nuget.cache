@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j1epPkKSd9LgTpA57DIdBAqnPwVVoU0tsiDD1INuWyaamQoJH8B/CpO8V8mfOT6cagOmSVQSc+BeDiJACm50Zw==",
+  "dgSpecHash": "xYf104Gz6/wSVPBz7BSS+HxvHe6ERpleeO/zkIkZZalNUi2cxLjpngE0x4lbwK4NlqlKf+HZT3WIqIXnTJYQUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server.Domain\\NimbusSync.Server.Domain.csproj",
+  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Server.Domain\\NimbusSync.Server.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
