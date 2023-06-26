@@ -1,10 +1,4 @@
 {
-  "ExpandedNodes": [
-    "",
-    "\\NimbusSync",
-    "\\NimbusSync\\NimbusSync.Server",
-    "\\NimbusSync\\NimbusSync.Server\\Repositories"
-  ],
-  "SelectedNode": "\\NimbusSync\\NimbusSync.Server\\Repositories\\TecnicalDrawStaticRepository.cs",
+  "ExpandedNodes": [],
   "PreviewInSolutionExplorer": false
 }

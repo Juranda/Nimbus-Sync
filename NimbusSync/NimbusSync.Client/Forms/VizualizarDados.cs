@@ -10,12 +10,16 @@ namespace NimbusSync.Client.Forms
         private TecnicalDraw? selectedDraw = null;
         private readonly List<TecnicalDraw> tecnicalDraws = new List<TecnicalDraw>();
         private readonly TecnicalDrawStaticRepository repository = new();
-        
+
         public VizualizarDados()
         {
             InitializeComponent();
-            drawsList.RowEnter += SelectDraw;
+            drawsGrid.RowEnter += SelectDraw;
             OnItemSelected += UIDrawSelected;
+            tecnicalDraws = GenerateRandomDraws(10);
+            drawsGrid.DataSource = tecnicalDraws;
+
+            tecnicalDraws.Add(new TecnicalDraw("1", "Nimbus Sync", "App incrivel", "C:\\Users\\felip\\Downloads\\Nimbus Sync.pdf"));
         }
 
         private void UIDrawSelected(TecnicalDraw? draw)
@@ -44,9 +48,7 @@ namespace NimbusSync.Client.Forms
         {
             int rowIndex = e.RowIndex;
 
-            if (rowIndex == 0) return;
-
-            var vizibleItens = (List<TecnicalDraw>)drawsList.DataSource;
+            var vizibleItens = (List<TecnicalDraw>)drawsGrid.DataSource;
             selectedDraw = vizibleItens[rowIndex];
             OnItemSelected.Invoke(selectedDraw);
         }
@@ -65,8 +67,13 @@ namespace NimbusSync.Client.Forms
                 UpdateGrid();
                 return;
             }
+
             var tecDraw = new TecnicalDraw(code, name, desc, DateOnly.FromDateTime(date), author, "");
-            var filteredDraws = await repository.GetTecnicalDrawsAsync(tecDraw);
+            var filteredDraws = tecnicalDraws.Where(x =>
+                x.Code.Contains(code) &&
+                x.Name.ToLower().Contains(name.ToLower()) &&
+                x.Author.ToLower().Contains(author.ToLower()))
+                .ToList();
 
             if (useDataCheckBox.Checked && filteredDraws.Count > 0)
             {
@@ -80,12 +87,12 @@ namespace NimbusSync.Client.Forms
 
         private void UpdateGrid()
         {
-            drawsList.DataSource = tecnicalDraws;
+            drawsGrid.DataSource = tecnicalDraws;
         }
 
         private void UpdateGrid(List<TecnicalDraw> tecnicalDraws)
         {
-            drawsList.DataSource = tecnicalDraws;
+            drawsGrid.DataSource = tecnicalDraws;
         }
 
         private void ToggleUsingDate(object sender, EventArgs e)
@@ -125,7 +132,7 @@ namespace NimbusSync.Client.Forms
 
             if (criarNovoDesenho.ShowDialog() == DialogResult.OK)
             {
-                repository.PostTecnicalDrawAsync(criarNovoDesenho.Draw);
+                tecnicalDraws.Add(criarNovoDesenho.Draw);
                 UpdateGrid();
                 MessageBox.Show("Desenho criado!");
             }
@@ -136,11 +143,30 @@ namespace NimbusSync.Client.Forms
             if (selectedDraw == null) return;
 
             var result = MessageBox.Show("Tem certeza que deseja remover?", "Atenção", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
-                repository.DeleteDrawAsync(selectedDraw.Code);
+                tecnicalDraws.Remove(selectedDraw);
                 selectedDraw = null;
                 UpdateGrid();
+            }
+        }
+
+        private void OpenFile(object sender, EventArgs e)
+        {
+            if (selectedDraw is not null && File.Exists(selectedDraw.FilePath))
+            {
+                var processInfo = new System.Diagnostics.ProcessStartInfo(selectedDraw.FilePath);
+                System.Diagnostics.Process.Start(processInfo);
+            }
+        }
+
+        private void editDrawButton_Click(object sender, EventArgs e)
+        {
+            EditarDesenho editarDesenho = new EditarDesenho(selectedDraw);
+
+            if(editarDesenho.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Desenho alterado");
             }
         }
     }
