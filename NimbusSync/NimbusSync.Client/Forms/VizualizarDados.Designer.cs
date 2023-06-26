@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             searchButton = new Button();
             label1 = new Label();
-            drawsList = new DataGridView();
+            drawsGrid = new DataGridView();
             codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -55,7 +55,7 @@
             useDataCheckBox = new CheckBox();
             descField = new TextBox();
             label6 = new Label();
-            ((System.ComponentModel.ISupportInitialize)drawsList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)drawsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tecnicalDrawBindingSource).BeginInit();
             GridPanel.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -88,21 +88,21 @@
             label1.Text = "Nimbus Sync 1.0";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // drawsList
+            // drawsGrid
             // 
-            drawsList.AllowUserToAddRows = false;
-            drawsList.AutoGenerateColumns = false;
-            drawsList.BorderStyle = BorderStyle.None;
-            drawsList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            drawsList.Columns.AddRange(new DataGridViewColumn[] { codeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, authorDataGridViewTextBoxColumn, creationDateDataGridViewTextBoxColumn });
-            drawsList.DataSource = tecnicalDrawBindingSource;
-            drawsList.Dock = DockStyle.Fill;
-            drawsList.Location = new Point(0, 0);
-            drawsList.Margin = new Padding(0);
-            drawsList.Name = "drawsList";
-            drawsList.RowTemplate.Height = 25;
-            drawsList.Size = new Size(593, 235);
-            drawsList.TabIndex = 2;
+            drawsGrid.AllowUserToAddRows = false;
+            drawsGrid.AutoGenerateColumns = false;
+            drawsGrid.BorderStyle = BorderStyle.None;
+            drawsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            drawsGrid.Columns.AddRange(new DataGridViewColumn[] { codeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, authorDataGridViewTextBoxColumn, creationDateDataGridViewTextBoxColumn });
+            drawsGrid.DataSource = tecnicalDrawBindingSource;
+            drawsGrid.Dock = DockStyle.Fill;
+            drawsGrid.Location = new Point(0, 0);
+            drawsGrid.Margin = new Padding(0);
+            drawsGrid.Name = "drawsGrid";
+            drawsGrid.RowTemplate.Height = 25;
+            drawsGrid.Size = new Size(593, 235);
+            drawsGrid.TabIndex = 2;
             // 
             // codeDataGridViewTextBoxColumn
             // 
@@ -126,7 +126,7 @@
             descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
             descriptionDataGridViewTextBoxColumn.HeaderText = "Descrição";
             descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            descriptionDataGridViewTextBoxColumn.Width = 83;
+            descriptionDataGridViewTextBoxColumn.Width = 65;
             // 
             // authorDataGridViewTextBoxColumn
             // 
@@ -142,7 +142,7 @@
             creationDateDataGridViewTextBoxColumn.DataPropertyName = "CreationDate";
             creationDateDataGridViewTextBoxColumn.HeaderText = "Data criação";
             creationDateDataGridViewTextBoxColumn.Name = "creationDateDataGridViewTextBoxColumn";
-            creationDateDataGridViewTextBoxColumn.Width = 89;
+            creationDateDataGridViewTextBoxColumn.Width = 72;
             // 
             // tecnicalDrawBindingSource
             // 
@@ -151,7 +151,7 @@
             // GridPanel
             // 
             GridPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GridPanel.Controls.Add(drawsList);
+            GridPanel.Controls.Add(drawsGrid);
             GridPanel.Location = new Point(12, 118);
             GridPanel.Name = "GridPanel";
             GridPanel.Size = new Size(593, 235);
@@ -265,6 +265,7 @@
             editDrawButton.TabIndex = 1;
             editDrawButton.Text = "Editar";
             editDrawButton.UseVisualStyleBackColor = true;
+            editDrawButton.Click += editDrawButton_Click;
             // 
             // deleteDrawButton
             // 
@@ -288,6 +289,7 @@
             vizualizeDrawButton.TabIndex = 3;
             vizualizeDrawButton.Text = "Vizualizar";
             vizualizeDrawButton.UseVisualStyleBackColor = true;
+            vizualizeDrawButton.Click += OpenFile;
             // 
             // tableLayoutPanel1
             // 
@@ -364,7 +366,7 @@
             ForeColor = SystemColors.ControlText;
             Name = "VizualizarDados";
             Text = "Nimbus Sync";
-            ((System.ComponentModel.ISupportInitialize)drawsList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)drawsGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)tecnicalDrawBindingSource).EndInit();
             GridPanel.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
@@ -376,7 +378,7 @@
 
         private Button searchButton;
         private Label label1;
-        private DataGridView drawsList;
+        private DataGridView drawsGrid;
         private Panel GridPanel;
         private Label label2;
         private TextBox codeField;
