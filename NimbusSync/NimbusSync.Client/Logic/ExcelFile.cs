@@ -10,7 +10,7 @@ namespace NimbusSync.Client.Logic
             ExcelPackage package = new ExcelPackage(new FileInfo(filePath));
             return package.Workbook.Worksheets.Select(ws => ws.Name).ToArray();
         }
-        public static List<T>? ReadTable<T>(string filePath, int sheetIndex) where T : new()
+        public static List<T>? ReadSheet<T>(string filePath, int sheetIndex) where T : new()
         {
             ExcelPackage package = new ExcelPackage(new FileInfo(filePath));
             ExcelWorksheet worksheet = package.Workbook.Worksheets[sheetIndex];

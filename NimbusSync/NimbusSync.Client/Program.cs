@@ -1,3 +1,5 @@
+using NimbusSync.Client.Forms;
+
 namespace NimbusSync.Client
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace NimbusSync.Client
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Main());
+            Application.Run(new VizualizarDados());
         }
     }
 }

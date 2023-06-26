@@ -1,5 +1,5 @@
 @host = localhost
-@port = 7035
+@port = 5001
 
 POST https://{{host}}:{{port}}/TecnicalDraws
 Content-Type: application/json
@@ -8,5 +8,7 @@ Content-Type: application/json
   "id": "12031",
   "name": "Desenho Incrivel",
   "file": "12341234",
-  "description": "Mais incrivel que os outros"
+  "description": "Mais incrivel que os outros",
+  "authorName": "felip",
+  "authorId": "Hey"
 }

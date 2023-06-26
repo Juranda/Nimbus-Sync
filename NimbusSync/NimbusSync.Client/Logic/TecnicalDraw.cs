@@ -5,13 +5,23 @@
         public string? Code { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public DateTime? CreationDate { get; set; }
+        public DateOnly? CreationDate { get; set; }
         public string? Author { get; set; }
         public string? FilePath { get; set; }
 
         const string HAS_NO_AUTHOR = "None";
 
         public TecnicalDraw() { }
+
+        public TecnicalDraw(string? code, string? name, string? description, DateOnly? creationDate, string? author, string? filePath)
+        {
+            Code = code;
+            Name = name;
+            Description = description;
+            CreationDate = creationDate;
+            Author = author;
+            FilePath = filePath;
+        }
 
         public TecnicalDraw(string? code, string? name, string? description, string? filePath)
         {
@@ -64,7 +74,7 @@
 
             try
             {
-                var creationDateTime = File.GetCreationTime(FilePath);
+                var creationDateTime = DateOnly.FromDateTime(File.GetCreationTime(FilePath));
                 CreationDate = creationDateTime;
             }
             catch (Exception e)

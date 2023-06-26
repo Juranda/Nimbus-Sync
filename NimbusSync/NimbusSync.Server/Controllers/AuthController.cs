@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NimbusSync.Server.Models.DTO;
+using NimbusSync.Models.DTO;
 using NimbusSync.Server.Repositories;
 
 namespace NimbusSync.Server.Controllers

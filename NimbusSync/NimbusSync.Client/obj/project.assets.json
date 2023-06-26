@@ -1311,6 +1311,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "NimbusSync.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/NimbusSync.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NimbusSync.Models.dll": {}
+        }
       }
     }
   },
@@ -4458,13 +4468,19 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "NimbusSync.Models/1.0.0": {
+      "type": "project",
+      "path": "../NimbusSync.Models/NimbusSync.Models.csproj",
+      "msbuildProject": "../NimbusSync.Models/NimbusSync.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "EPPlus >= 4.5.3.3",
       "ExcelDataReader >= 3.6.0",
-      "ExcelDataReader.DataSet >= 3.6.0"
+      "ExcelDataReader.DataSet >= 3.6.0",
+      "NimbusSync.Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4498,7 +4514,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj": {
+              "projectPath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

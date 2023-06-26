@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using NimbusSync.Server.Domain;
+using NimbusSync.Models.Domain;
 using System.Security.Claims;
 using System.Text;
 

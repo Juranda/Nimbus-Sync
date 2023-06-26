@@ -1,5 +1,4 @@
-﻿using NimbusSync.Server.Domain;
-using System.Security.Principal;
+﻿using NimbusSync.Models.Domain;
 
 namespace NimbusSync.Server.Repositories
 {

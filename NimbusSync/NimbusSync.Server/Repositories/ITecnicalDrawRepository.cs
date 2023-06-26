@@ -1,5 +1,5 @@
-﻿using NimbusSync.Server.Domain;
-using NimbusSync.Server.Models.DTO;
+﻿using NimbusSync.Models.Domain;
+using NimbusSync.Models.DTO;
 
 namespace NimbusSync.Server.Repositories
 {

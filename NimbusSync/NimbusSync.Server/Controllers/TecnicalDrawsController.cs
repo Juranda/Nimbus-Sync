@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using NimbusSync.Server.Domain;
-using NimbusSync.Server.Models.DTO;
+using NimbusSync.Models.DTO;
+using NimbusSync.Models.Domain;
 using NimbusSync.Server.Repositories;
 
 namespace NimbusSync.Server.Controllers
