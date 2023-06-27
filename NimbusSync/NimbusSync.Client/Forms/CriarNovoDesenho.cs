@@ -1,13 +1,43 @@
-﻿using System.Xml.Linq;
+﻿using NimbusSync.Client.Logic;
+using System;
+using System.Collections;
+using System.Xml.Linq;
 
 namespace NimbusSync.Client.Forms
 {
     public partial class CriarNovoDesenho : Form
     {
-        public TecnicalDraw Draw { get; private set; }
+        public TecnicalDraw? Draw { get; private set; }
+        public List<TecnicalDraw>? DrawList { get; private set; }
+
+        public bool IsSingle { get; private set; }
         public CriarNovoDesenho()
         {
             InitializeComponent();
+
+            Draw = null;
+            DrawList = null;
+
+            selectExcelFileSheetCombox.SelectedIndexChanged += SetGridView;
+        }
+
+        private void SetGridView(object? sender, EventArgs e)
+        {
+            excelTablePreview.DataSource = null;
+            var fromExcelTableTecnicalDraws = ExcelFile.ReadSheet<FromExcelTableTecnicalDraw>(openExcelFileDialog.FileName, selectExcelFileSheetCombox.SelectedIndex);
+
+            if (fromExcelTableTecnicalDraws is null) return;
+
+            var tecnicalDraws = fromExcelTableTecnicalDraws
+                .Select(x => new TecnicalDraw(
+                    code: x.Codigo,
+                    name: x.Nome,
+                    description: x.Descricao,
+                    filePath: x.Caminho
+                    ))
+                .ToList();
+            excelTablePreview.DataSource = tecnicalDraws;
+            DrawList = tecnicalDraws;
         }
 
         private void ToggleCodeField(object sender, EventArgs e)
@@ -20,7 +50,7 @@ namespace NimbusSync.Client.Forms
             date.Enabled = !date.Enabled;
         }
 
-        private void selectDrawButton_Click(object sender, EventArgs e)
+        private void SelectFile(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK)
             {
@@ -33,6 +63,19 @@ namespace NimbusSync.Client.Forms
         }
 
         private void RegisterDraw(object sender, EventArgs e)
+        {
+            if(createOption1.Checked)
+            {
+                RegisterSingleDraw();
+            } else if(createOption2.Checked)
+            {
+                IsSingle = false;
+            }
+
+            DialogResult = DialogResult.OK;
+        }
+
+        private void RegisterSingleDraw()
         {
             var _code = createCodeCheckBox.Checked ? Guid.NewGuid().ToString() : code.Text;
             var _name = name.Text;
@@ -50,14 +93,13 @@ namespace NimbusSync.Client.Forms
 
             var draw = new TecnicalDraw(_code, _name, _desc, _date, _author, openFileDialog.FileName);
 
-            if(IsInvalidDraw(draw, out List<string> invalidFieldNames))
+            if (IsInvalidDraw(draw, out List<string> invalidFieldNames))
             {
                 MessageBox.Show("Campos invalidos:\n" + string.Join(".\n", invalidFieldNames), "Preencha os campos necessários");
                 return;
             }
-
+            IsSingle = true;
             Draw = draw;
-            DialogResult = DialogResult.OK;
         }
 
         private bool IsInvalidDraw(TecnicalDraw tecnicalDraw, out List<string> invalidFieldNames)
@@ -85,6 +127,32 @@ namespace NimbusSync.Client.Forms
         private void Enter(object sender, KeyEventArgs e)
         {
             RegisterDraw(sender, e);
+        }
+
+        private void CreateFromTableChecked(object sender, EventArgs e)
+        {
+            createFromTableGroup.Enabled = true;
+            createSingleGroup.Enabled = false;
+        }
+
+        private void CreateSingleChecked(object sender, EventArgs e)
+        {
+            createFromTableGroup.Enabled = false;
+            createSingleGroup.Enabled = true;
+        }
+
+        private void SelectExcelFile(object sender, EventArgs e)
+        {
+            var result = openExcelFileDialog.ShowDialog();
+
+            if (result != DialogResult.OK) return;
+
+            selectedExcelFileLabel.Text = $"{openExcelFileDialog.FileName.Split("\\").Last()} selecionado.";
+
+            string[] sheets = ExcelFile.GetSheetNames(openExcelFileDialog.FileName);
+
+            selectExcelFileSheetCombox.Items.Clear();
+            selectExcelFileSheetCombox.Items.AddRange(sheets);
         }
     }
 }

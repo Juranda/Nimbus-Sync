@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lUZy+JRHQzG+Up2Ux5HNiLPCyiGTUatu61C9jxk4gIYwDcnFhDf8Ii5/q1Hwgc6yiGycDSVO+gDvEFKKGor+ww==",
+  "dgSpecHash": "M23TJrPwL5N+NEFhyFNSTw8djhXcSqO5sHDoczoLA87Vttku2qIA16whMa07BmYr+PZuAQzdQq1BtLo91oEuYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Client\\NimbusSync.Client.csproj",
+  "projectFilePath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Client\\NimbusSync.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felip\\.nuget\\packages\\epplus\\4.5.3.3\\epplus.4.5.3.3.nupkg.sha512",
     "C:\\Users\\felip\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",

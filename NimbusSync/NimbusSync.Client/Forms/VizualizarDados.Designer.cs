@@ -91,6 +91,7 @@
             // drawsGrid
             // 
             drawsGrid.AllowUserToAddRows = false;
+            drawsGrid.AllowUserToDeleteRows = false;
             drawsGrid.AutoGenerateColumns = false;
             drawsGrid.BorderStyle = BorderStyle.None;
             drawsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -100,6 +101,7 @@
             drawsGrid.Location = new Point(0, 0);
             drawsGrid.Margin = new Padding(0);
             drawsGrid.Name = "drawsGrid";
+            drawsGrid.ReadOnly = true;
             drawsGrid.RowTemplate.Height = 25;
             drawsGrid.Size = new Size(593, 235);
             drawsGrid.TabIndex = 2;
@@ -110,6 +112,7 @@
             codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
             codeDataGridViewTextBoxColumn.HeaderText = "Codigo";
             codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            codeDataGridViewTextBoxColumn.ReadOnly = true;
             codeDataGridViewTextBoxColumn.Width = 71;
             // 
             // nameDataGridViewTextBoxColumn
@@ -118,6 +121,7 @@
             nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             nameDataGridViewTextBoxColumn.HeaderText = "Nome do desenho";
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
             nameDataGridViewTextBoxColumn.Width = 119;
             // 
             // descriptionDataGridViewTextBoxColumn
@@ -126,7 +130,8 @@
             descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
             descriptionDataGridViewTextBoxColumn.HeaderText = "Descrição";
             descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            descriptionDataGridViewTextBoxColumn.Width = 65;
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            descriptionDataGridViewTextBoxColumn.Width = 83;
             // 
             // authorDataGridViewTextBoxColumn
             // 
@@ -134,6 +139,7 @@
             authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
             authorDataGridViewTextBoxColumn.HeaderText = "Autor";
             authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            authorDataGridViewTextBoxColumn.ReadOnly = true;
             authorDataGridViewTextBoxColumn.Width = 62;
             // 
             // creationDateDataGridViewTextBoxColumn
@@ -142,7 +148,8 @@
             creationDateDataGridViewTextBoxColumn.DataPropertyName = "CreationDate";
             creationDateDataGridViewTextBoxColumn.HeaderText = "Data criação";
             creationDateDataGridViewTextBoxColumn.Name = "creationDateDataGridViewTextBoxColumn";
-            creationDateDataGridViewTextBoxColumn.Width = 72;
+            creationDateDataGridViewTextBoxColumn.ReadOnly = true;
+            creationDateDataGridViewTextBoxColumn.Width = 89;
             // 
             // tecnicalDrawBindingSource
             // 
@@ -277,7 +284,7 @@
             deleteDrawButton.TabIndex = 2;
             deleteDrawButton.Text = "Deletar";
             deleteDrawButton.UseVisualStyleBackColor = true;
-            deleteDrawButton.Click += deleteDrawButton_Click;
+            deleteDrawButton.Click += DeleteDraw;
             // 
             // vizualizeDrawButton
             // 

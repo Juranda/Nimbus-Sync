@@ -88,18 +88,6 @@ namespace NimbusSync.Server.Repositories
         {
             var tecDraw = tecnicalDraws.FirstOrDefault(tD => tD.Code == code);
 
-            //if (tecDraw == null) return null;
-
-            //List<PropertyInfo> notNullOrEmptyProps = tecnicalDraw.GetNotNullProperties();
-            //Type tecDrawType = tecDraw.GetType();
-
-            //notNullOrEmptyProps.ForEach(newPropertie =>
-            //{
-            //    PropertyInfo tecDrawPropertyInfo = tecDrawType.GetProperty(newPropertie.Name);
-
-            //    tecDrawPropertyInfo.SetValue(tecDraw, newPropertie.GetValue(tecnicalDraw));
-            //});
-
             return Task.FromResult(tecDraw);
         }
     }

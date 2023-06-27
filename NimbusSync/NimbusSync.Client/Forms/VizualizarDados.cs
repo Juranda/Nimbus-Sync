@@ -1,4 +1,5 @@
-﻿using NimbusSync.Server.Repositories;
+﻿using NimbusSync.Client.Logic;
+using NimbusSync.Server.Repositories;
 using System.CodeDom;
 
 namespace NimbusSync.Client.Forms
@@ -14,7 +15,7 @@ namespace NimbusSync.Client.Forms
         public VizualizarDados()
         {
             InitializeComponent();
-            drawsGrid.RowEnter += SelectDraw;
+            drawsGrid.CellClick += SelectDraw;
             OnItemSelected += UIDrawSelected;
             tecnicalDraws = GenerateRandomDraws(10);
             drawsGrid.DataSource = tecnicalDraws;
@@ -38,22 +39,24 @@ namespace NimbusSync.Client.Forms
             }
         }
 
-        private void DeselectDraw(object? sender, DataGridViewCellEventArgs e)
-        {
-            selectedDraw = null;
-            OnItemSelected.Invoke(null);
-        }
-
         private void SelectDraw(object? sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
 
             var vizibleItens = (List<TecnicalDraw>)drawsGrid.DataSource;
-            selectedDraw = vizibleItens[rowIndex];
-            OnItemSelected.Invoke(selectedDraw);
+
+            if(rowIndex >= 0 && rowIndex < vizibleItens.Count)
+            {
+                selectedDraw = vizibleItens[rowIndex];
+                OnItemSelected.Invoke(selectedDraw);
+            } else
+            {
+                selectedDraw = null;
+                OnItemSelected.Invoke(null);
+            }
         }
 
-        private async void FilterList(object sender, EventArgs e)
+        private void FilterList(object sender, EventArgs e)
         {
             var code = codeField.Text;
             var name = nameField.Text;
@@ -78,7 +81,16 @@ namespace NimbusSync.Client.Forms
             if (useDataCheckBox.Checked && filteredDraws.Count > 0)
             {
                 filteredDraws = filteredDraws
-                    .Where(tecnicalDraw => tecnicalDraw.CreationDate.Value.DayNumber == DateOnly.FromDateTime(date).DayNumber)
+                    .Where(tecnicalDraw =>
+                    {
+                        if (!tecnicalDraw.CreationDate.HasValue)
+                            return false;
+
+                        if (tecnicalDraw.CreationDate.Value.DayNumber != DateOnly.FromDateTime(date).DayNumber)
+                            return false;
+
+                        else return true;
+                    })
                     .ToList();
             }
 
@@ -87,11 +99,13 @@ namespace NimbusSync.Client.Forms
 
         private void UpdateGrid()
         {
+            drawsGrid.DataSource = null;
             drawsGrid.DataSource = tecnicalDraws;
         }
 
         private void UpdateGrid(List<TecnicalDraw> tecnicalDraws)
         {
+            drawsGrid.DataSource = null;
             drawsGrid.DataSource = tecnicalDraws;
         }
 
@@ -102,23 +116,7 @@ namespace NimbusSync.Client.Forms
 
         private List<TecnicalDraw> GenerateRandomDraws(int quantity)
         {
-            DateOnly start = new DateOnly(1995, 1, 1);
-            int range = DateOnly.FromDateTime(DateTime.Today).Day - start.Day;
-
-            string[] names = new string[] { "Felipe", "Bruno", "Luiz", "Gabriel", "Bigode" };
-
-            var tecDraws = Enumerable
-                .Range(1, quantity)
-                .Select(x => new TecnicalDraw(
-                    GenerateRandomNumberString(4),
-                    $"Desenho {GenerateRandomNumberString(6)}",
-                    "incrivel",
-                    start.AddDays(random.Next(range)),
-                    names[random.Next(names.Length)],
-                    GenerateRandomNumberString(40)))
-                .ToList();
-
-            return tecDraws;
+            return new TecnicalDrawStaticDraws().CreateTecnicalDraws();
         }
 
         private string GenerateRandomNumberString(int length)
@@ -127,21 +125,28 @@ namespace NimbusSync.Client.Forms
         }
 
         private void RegisterNewDraw(object sender, EventArgs e)
-        {
+        { 
             CriarNovoDesenho criarNovoDesenho = new CriarNovoDesenho();
 
-            if (criarNovoDesenho.ShowDialog() == DialogResult.OK)
+            if (criarNovoDesenho.ShowDialog() != DialogResult.OK) return;
+            
+            if(criarNovoDesenho.IsSingle)
             {
                 tecnicalDraws.Add(criarNovoDesenho.Draw);
                 UpdateGrid();
-                MessageBox.Show("Desenho criado!");
+                MessageBox.Show("Desenho registrado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else
+            {
+                tecnicalDraws.AddRange(criarNovoDesenho.DrawList);
+                UpdateGrid();
+                MessageBox.Show($"{criarNovoDesenho.DrawList.Count} desenhos registrados!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
+
         }
 
-        private void deleteDrawButton_Click(object sender, EventArgs e)
+        private void DeleteDraw(object sender, EventArgs e)
         {
-            if (selectedDraw == null) return;
-
             var result = MessageBox.Show("Tem certeza que deseja remover?", "Atenção", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (result == DialogResult.OK)
             {
@@ -164,7 +169,7 @@ namespace NimbusSync.Client.Forms
         {
             EditarDesenho editarDesenho = new EditarDesenho(selectedDraw);
 
-            if(editarDesenho.ShowDialog() == DialogResult.OK)
+            if (editarDesenho.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Desenho alterado");
             }

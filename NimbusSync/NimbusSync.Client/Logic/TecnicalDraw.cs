@@ -8,7 +8,6 @@
         public DateOnly? CreationDate { get; set; }
         public string? Author { get; set; }
         public string? FilePath { get; set; }
-
         const string HAS_NO_AUTHOR = "None";
 
         public TecnicalDraw() { }
@@ -82,7 +81,6 @@
                 Console.Write(e.Message);
             }
         }
-
 
         public byte[]? GetFile()
         {

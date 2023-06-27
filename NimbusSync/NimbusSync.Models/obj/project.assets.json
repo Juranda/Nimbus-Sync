@@ -8,19 +8,24 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\felip\\.nuget\\packages\\": {}
+    "C:\\Users\\felip\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj",
+      "projectUniqueName": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj",
       "projectName": "NimbusSync.Models",
-      "projectPath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj",
+      "projectPath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\NimbusSync.Models.csproj",
       "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felip\\source\\repos\\Juranda\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\obj\\",
+      "outputPath": "C:\\Users\\felip\\source\\repos\\Nimbus-Sync\\NimbusSync\\NimbusSync.Models\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
