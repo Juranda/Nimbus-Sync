@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\NimbusSync.Server.props" />
-</Project>
