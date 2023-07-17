@@ -8,6 +8,6 @@
         public byte[] File { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public string AuthorId { get; set; }
+        public string? AuthorId { get; set; }
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NimbusSync.Server", "Nimbus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NimbusSync.Client", "NimbusSync.Client\NimbusSync.Client.csproj", "{D2D6A9D3-3248-49CF-9DFE-E0CE2F1743D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusSync.Models", "NimbusSync.Models\NimbusSync.Models.csproj", "{FA4F9D19-26CB-4918-9FD9-205AD2BFD135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NimbusSync.Models", "NimbusSync.Models\NimbusSync.Models.csproj", "{FA4F9D19-26CB-4918-9FD9-205AD2BFD135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusSync.Server.Tests", "NimbusSync.Server.Tests\NimbusSync.Server.Tests.csproj", "{114F3429-B9C2-460D-8348-631D4A15B619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{FA4F9D19-26CB-4918-9FD9-205AD2BFD135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA4F9D19-26CB-4918-9FD9-205AD2BFD135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA4F9D19-26CB-4918-9FD9-205AD2BFD135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{114F3429-B9C2-460D-8348-631D4A15B619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114F3429-B9C2-460D-8348-631D4A15B619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114F3429-B9C2-460D-8348-631D4A15B619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114F3429-B9C2-460D-8348-631D4A15B619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

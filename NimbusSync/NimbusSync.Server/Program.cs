@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -40,7 +39,6 @@ builder.Services.AddDbContext<NimbusSyncDBContext>(options =>
         new MySqlServerVersion(new Version(8,0,31))
         )
     );
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ITecnicalDrawRepository, TecnicalDrawStaticRepository>();
 builder.Services.AddScoped<ITokenHandler, NimbusSync.Server.Repositories.TokenHandler>();
 builder.Services.AddScoped<IAuthRepository, AuthStaticRepository>();

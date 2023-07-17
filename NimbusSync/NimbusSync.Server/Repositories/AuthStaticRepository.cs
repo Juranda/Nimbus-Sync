@@ -5,8 +5,9 @@ namespace NimbusSync.Server.Repositories
     public class AuthStaticRepository : IAuthRepository
     {
         private readonly List<Account> accounts;
+        private readonly ITokenHandler tokenHandler;
 
-        public AuthStaticRepository()
+        public AuthStaticRepository(ITokenHandler tokenHandler)
         {
             accounts = new List<Account>
             {
@@ -42,21 +43,29 @@ namespace NimbusSync.Server.Repositories
                     }
                 }
             };
+            this.tokenHandler = tokenHandler;
         }
 
-        public async Task<Account> AuthenticateAsync(string email, string password)
+        public async Task<string?> AuthenticateAsync(string email, string password)
         {
             var authenticatedAccount = accounts
                 .FirstOrDefault(a => a.Email == email && a.Password == password);
 
-            return await Task.FromResult(authenticatedAccount);
+            if(authenticatedAccount == default)
+            {
+                return await Task.FromResult<string?>(null);
+            }
+
+            string token = await tokenHandler.CreateTokenAsync(authenticatedAccount);
+
+            return await Task.FromResult(token);
         }
 
-        public Task<Account> RegisterAsync(string fullName, string email, string password, List<Account.PrivilageTypes> privileges)
+        public async Task<string?> RegisterAsync(string fullName, string email, string password, List<Account.PrivilageTypes> privileges)
         {
-            if(accounts.Find(a => a.Email == email) != null)
+            if(accounts.FirstOrDefault(a => a.Email == email) != null)
             {
-                return null;
+                return await Task.FromResult<string?>(null);
             }
 
             var account = new Account {
@@ -69,7 +78,9 @@ namespace NimbusSync.Server.Repositories
 
             accounts.Add(account);
 
-            return Task.FromResult(account);
+            string token = await tokenHandler.CreateTokenAsync(account);
+
+            return await Task.FromResult(token);
         }
     }
 }

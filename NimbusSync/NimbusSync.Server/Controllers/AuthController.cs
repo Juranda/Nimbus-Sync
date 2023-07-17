@@ -9,23 +9,19 @@ namespace NimbusSync.Server.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository authRepository;
-        private readonly ITokenHandler tokenHandler;
 
-        public AuthController(IAuthRepository authRepository, ITokenHandler tokenHandler)
+        public AuthController(IAuthRepository authRepository)
         {
             this.authRepository = authRepository;
-            this.tokenHandler = tokenHandler;
         }
 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginAccountRequest loginAccountRequest)
         {
-            var account = await authRepository.AuthenticateAsync(loginAccountRequest.Email, loginAccountRequest.Password);
+            string token = await authRepository.AuthenticateAsync(loginAccountRequest.Email, loginAccountRequest.Password);
 
-            if (account == null) return BadRequest("Usuário ou senha inválidos!");
-
-            var token = await tokenHandler.CreateTokenAsync(account);
+            if (token == null) return BadRequest("Usuário ou senha inválidos!");
 
             return Ok(token);
         }
@@ -34,15 +30,13 @@ namespace NimbusSync.Server.Controllers
         [Route("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterAccountRequest registerAccountRequest)
         {
-            var account = await authRepository.RegisterAsync(
+            var token = await authRepository.RegisterAsync(
                 registerAccountRequest.FullName, 
                 registerAccountRequest.Email,
                 registerAccountRequest.Password, 
                 registerAccountRequest.Privileges);
 
-            if (account == null) return BadRequest("Uma conta com esse email já existe!");
-
-            var token = await tokenHandler.CreateTokenAsync(account);
+            if (token == null) return BadRequest("Uma conta com esse email já existe!");
 
             return Ok(token);
         }

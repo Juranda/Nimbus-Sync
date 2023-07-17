@@ -23,12 +23,14 @@ namespace NimbusSync.Server.Repositories
                 new Claim(ClaimTypes.Email, account.Email)
             };
 
-            account.Privileges.ForEach(privilege =>
+            account.Privileges?.ForEach(privilege =>
             {
                 claims.Add(new Claim(ClaimTypes.Role, privilege.ToString()));
             });
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            string stringKey = configuration["JWT:Key"];
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(stringKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(

@@ -1,16 +1,13 @@
 ﻿using NimbusSync.Client.Logic;
-using NimbusSync.Server.Repositories;
-using System.CodeDom;
 
 namespace NimbusSync.Client.Forms
 {
     public partial class VizualizarDados : Form
     {
         private Action<TecnicalDraw?> OnItemSelected;
-        private Random random = new Random();
         private TecnicalDraw? selectedDraw = null;
+        private readonly Random random = new Random();
         private readonly List<TecnicalDraw> tecnicalDraws = new List<TecnicalDraw>();
-        private readonly TecnicalDrawStaticRepository repository = new();
 
         public VizualizarDados()
         {
@@ -19,24 +16,15 @@ namespace NimbusSync.Client.Forms
             OnItemSelected += UIDrawSelected;
             tecnicalDraws = GenerateRandomDraws(10);
             drawsGrid.DataSource = tecnicalDraws;
-
-            tecnicalDraws.Add(new TecnicalDraw("1", "Nimbus Sync", "App incrivel", "C:\\Users\\felip\\Downloads\\Nimbus Sync.pdf"));
         }
 
         private void UIDrawSelected(TecnicalDraw? draw)
         {
-            if (draw == null)
-            {
-                editDrawButton.Enabled = false;
-                deleteDrawButton.Enabled = false;
-                vizualizeDrawButton.Enabled = false;
-            }
-            else
-            {
-                editDrawButton.Enabled = true;
-                deleteDrawButton.Enabled = true;
-                vizualizeDrawButton.Enabled = true;
-            }
+            bool hasDraw = draw != null;
+
+            editDrawButton.Enabled = hasDraw;
+            deleteDrawButton.Enabled = hasDraw;
+            vizualizeDrawButton.Enabled = hasDraw;
         }
 
         private void SelectDraw(object? sender, DataGridViewCellEventArgs e)
@@ -64,7 +52,7 @@ namespace NimbusSync.Client.Forms
             var author = authorField.Text;
             var date = creationDateField.Value;
 
-            if (string.IsNullOrEmpty(codeField.Text + nameField.Text + authorField.Text +
+            if (string.IsNullOrEmpty(codeField.Text + nameField.Text + descField.Text + authorField.Text +
                 (useDataCheckBox.Checked ? creationDateField.Value : string.Empty)))
             {
                 UpdateGrid();
@@ -73,7 +61,8 @@ namespace NimbusSync.Client.Forms
 
             var tecDraw = new TecnicalDraw(code, name, desc, DateOnly.FromDateTime(date), author, "");
             var filteredDraws = tecnicalDraws.Where(x =>
-                x.Code.Contains(code) &&
+                x.Code.Equals(code) &&
+                x.Description.ToLower().Contains(desc.ToLower()) &&
                 x.Name.ToLower().Contains(name.ToLower()) &&
                 x.Author.ToLower().Contains(author.ToLower()))
                 .ToList();
@@ -93,7 +82,6 @@ namespace NimbusSync.Client.Forms
                     })
                     .ToList();
             }
-
             UpdateGrid(filteredDraws);
         }
 
@@ -140,9 +128,7 @@ namespace NimbusSync.Client.Forms
                 tecnicalDraws.AddRange(criarNovoDesenho.DrawList);
                 UpdateGrid();
                 MessageBox.Show($"{criarNovoDesenho.DrawList.Count} desenhos registrados!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
-
         }
 
         private void DeleteDraw(object sender, EventArgs e)
@@ -167,6 +153,8 @@ namespace NimbusSync.Client.Forms
 
         private void editDrawButton_Click(object sender, EventArgs e)
         {
+            if (selectedDraw == null) return;
+
             EditarDesenho editarDesenho = new EditarDesenho(selectedDraw);
 
             if (editarDesenho.ShowDialog() == DialogResult.OK)
